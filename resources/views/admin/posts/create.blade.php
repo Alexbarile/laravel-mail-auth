@@ -11,7 +11,7 @@
                         <div class="alert alert-danger">{{$error}}</div>
                     @endforeach
                 @endif
-                <form method="POST" action="{{route('admin.posts.store')}}">
+                <form method="POST" action="{{route('admin.posts.store')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group m-2">
                         <label class="fs-2 fw-semibold" for="title">Titolo</label>
@@ -50,6 +50,13 @@
                         </div>
                         @endforeach
                         @error('technologies')
+                        <div class="text-danger">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group m-2">
+                        <label class="fs-2 fw-semibold">Immagine</label>
+                        <input type="file" class="form-control @error('cover_image') is-invalid @enderror" name="cover_image" id="cover_image">
+                        @error('cover_image')
                         <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
