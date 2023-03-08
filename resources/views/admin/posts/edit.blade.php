@@ -63,6 +63,16 @@
                         <div class="text-danger">{{$message}}</div>
                         @enderror
                     </div>
+                    <div class="form-group m-2">
+                        <label class="fs-2 fw-semibold">Immagine</label>
+                        <div>
+                            <img src="{{asset('storage/' .$post->cover_image)}}" alt="">
+                        </div>
+                        <input type="file" class="form-control @error('cover_image') is-invalid @enderror" name="cover_image" id="cover_image">
+                        @error('cover_image')
+                        <div class="text-danger">{{$message}}</div>
+                        @enderror
+                    </div>
                     <button type="submit" class="btn btn-success">Salva</button>
                 </form>
             </div>

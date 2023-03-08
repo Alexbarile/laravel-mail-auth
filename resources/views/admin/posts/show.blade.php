@@ -26,6 +26,7 @@
                 Nessuna tecnologia associato al Post    
                 @endforelse
             </p>
+            <img src="{{asset ('storage/' .$post->cover_image)}}" alt="{{$post->title}}">
         </div>
     </div>
 </div>
