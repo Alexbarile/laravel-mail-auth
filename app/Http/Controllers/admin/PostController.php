@@ -6,11 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConfirmProject;
 
 // MODEL
 use App\Models\Post;
 use App\Models\Type;
 use App\Models\Technology;
+use App\Models\Lead;
+
 
 class PostController extends Controller
 {
@@ -63,6 +67,16 @@ class PostController extends Controller
         if($request->has('technologies')){
             $newPost->technologies()->attach($request->technologies);
         }
+
+        $new_lead = new Lead();
+        $new_lead->title = $data['title'];
+        $new_lead->content = $data['content'];
+        $new_lead->slug = $data['slug'];
+
+        $new_lead->save();
+
+        Mail::to('hello@example.com')->send(new ConfirmProject($new_lead));
+
 
         // queste operazione si possono fare anche così (3 in 1)
         // $newPost = Post::create($data);
